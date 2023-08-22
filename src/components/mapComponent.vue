@@ -19,7 +19,7 @@ export default class mapComponent extends Vue {
 
   private scrapedData = {
     pageTitle: "",
-    links: [] as String[],
+    links: [] as string[],
   };
   getScrapedData() {
     return this.scrapedData;

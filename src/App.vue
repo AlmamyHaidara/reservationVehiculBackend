@@ -1,5 +1,5 @@
-<template style="background: #eff1ee">
-  <div class="relative">
+<template >
+  <div class="relative drop-shadow-lg">
 
 
     <Disclosure as="nav" v-slot="{ open }" style="background: #eff1ee">
@@ -153,7 +153,7 @@ export default defineComponent({
 
 nav {
   padding: 10px;
-  background: #eff1ee !important;
+  background: #fff !important;
 
   a {
     font-weight: bold;

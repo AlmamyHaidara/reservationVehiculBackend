@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<script>
+<script >
 import { LMap, LTileLayer, LMarker, LPopup } from "@vue-leaflet/vue-leaflet";
 import { ref } from "vue";
 

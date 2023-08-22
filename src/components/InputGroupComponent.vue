@@ -117,6 +117,8 @@ interface City {
   name: String;
 }
 import { getCountriesWithFlags } from "@/service/countries";
+import axios from "axios";
+import router from "@/router";
 
 export default defineComponent({
   name: "HeaderAcceuil",
@@ -238,19 +240,28 @@ export default defineComponent({
         this.error = true
       }
     },
-    searchCar: function () {
+    searchCar: async function () {
+
+      console.log(this.citys);
       if (this.citys.value != ref([]) && this.areas.value != ref([]) && !this.error) {
         let data = {
-          'selectCountry': this.selectedCountry,
+          'selectedCountry': this.selectedCountry,
           'selectCity': this.selectCity,
           'selectArea': this.selectArea,
-          'dateStart': this.dateStart,
-          'dateEnd': this.dateEnd,
+          'dateStart': this.dateStart.getFullYear() + '-' + '0' + (this.dateStart.getMonth() + 1) + '-' + this.dateStart.getDate(),
+          'dateEnd': this.dateEnd.getFullYear() + '-' + '0' + (this.dateEnd.getMonth() + 1) + '-' + this.dateEnd.getDate(),
           'timeStart': this.timeStart,
           'timeEnd': this.timeEnd,
         }
+        console.table(data);
 
+        let value = await axios.get(`http://localhost:8000/api/find-vehicles-${this.selectedCountry.name.toLowerCase()}-${this.selectCity.name.toLowerCase()}-${this.selectArea.name.toLowerCase()}-${data.dateStart}_${data.dateEnd}`)
+        console.log('=>', value.data);
+        value.data ?
+          router.push('/vehicules/reservation')
+          : false
       }
+
     }
 
   },

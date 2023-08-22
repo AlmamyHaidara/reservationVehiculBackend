@@ -3,19 +3,23 @@ import HomeView from '../views/HomeView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    name: 'Acceuil',
-    component: ()=> import('@/views/AcceuilView.vue')
+    path: "/",
+    name: "Acceuil",
+    component: () => import("@/views/AcceuilView.vue"),
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
+    path: "/about",
+    name: "about",
+    
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+  },
+  {
+    path: "/vehicules/reservation",
+    name: "reservation",
+    component: () =>  import(/* webpackChunkName: "about" */ "../views/ResevationViews.vue"),
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
