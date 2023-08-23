@@ -1,5 +1,5 @@
 <template>
-    <div class="border-0 h-18 flex justify-center mt-5 first-sect">
+    <div class="border-0 h-18 flex justify-center mt-1 first-sect bg-blue-900">
         <div class="flex justify-between h-14 w-2/5 mt-2 top-section">
 
             <div class="border-0 h-12 w-96 bg-slate-50 top-sec-left">
