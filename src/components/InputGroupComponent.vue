@@ -256,9 +256,10 @@ export default defineComponent({
         console.table(data);
 
         let value = await axios.get(`http://localhost:8000/api/find-vehicles-${this.selectedCountry.name.toLowerCase()}-${this.selectCity.name.toLowerCase()}-${this.selectArea.name.toLowerCase()}-${data.dateStart}_${data.dateEnd}`)
-        console.log('=>', value.data);
+        console.log('=>', (Array), value.data);
+        const dataJSON = JSON.stringify(value.data)
         value.data ?
-          router.push('/vehicules/reservation')
+          router.push({ path: '/vehicules/reservation', query: { data: dataJSON } })
           : false
       }
 

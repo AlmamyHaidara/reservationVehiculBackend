@@ -17,3 +17,8 @@ npm run build
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Git password
+```
+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
+```
