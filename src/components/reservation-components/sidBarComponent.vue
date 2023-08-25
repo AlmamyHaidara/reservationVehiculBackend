@@ -53,8 +53,8 @@
                 </p>
                 <div class="card flex justify-content-center">
                     <div class="w-72">
-                        <InputNumber class="w-full border-0 " v-model="price" inputId="horizontal-buttons" showButtons
-                            buttonLayout="horizontal" :step="20000" decrementButtonClass="p-button-danger"
+                        <InputNumber class="w-full border-0 " v-model="dataVehicle.price" inputId="horizontal-buttons"
+                            showButtons buttonLayout="horizontal" :step="20000" decrementButtonClass="p-button-danger"
                             incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
                             decrementButtonIcon="pi pi-minus" mode="currency" currency="XAF" />
                     </div>
@@ -67,15 +67,14 @@
                     TYPE DE VÉHICULE
                 </p>
                 <div class="grid grid-rows-4 grid-flow-col gap-4 ml-3 mt-2">
-
                     <div class="rounded-2xl h-10 w-28 border-2 border-gray-500  flex mt-0 hover:border-b-8 hover:border-blue-900 cursor-pointer hover:shadow-sky-900 "
                         v-for="(type, index) in car_type" :key="index" @click="isVehicule(type)"
-                        :class="car_type_select == type ? 'bg-blue-900' : ''">
+                        :class="dataVehicle.car_type_select == type ? 'bg-blue-900 ' : ''">
                         <i v-html="svg[index]" class=" font-bold text-xl text-left mt-0 ml-3"
-                            :class="car_type_select == type ? 'text-slate-50' : 'text-blue-900'"></i>
+                            :class="dataVehicle.car_type_select == type ? 'text-slate-50' : 'text-blue-900'"></i>
 
                         <p class="font-bold text-base  mt-2 ml-1 " style="margin-left: -0.2rem !important;"
-                            :class="car_type_select == type ? 'text-slate-50' : 'text-blue-900'">{{ type }}
+                            :class="dataVehicle.car_type_select == type ? 'text-slate-50' : 'text-blue-900'">{{ type }}
                         </p>
                     </div>
 
@@ -90,9 +89,10 @@
                 </p>
                 <div class="nbr ml-3 mt-2">
                     <p class="text-base font-bold text-left">Nombre de places min.</p>
-                    <InputNumber v-model="nbrPlace" inputId="horizontal-buttons" showButtons buttonLayout="horizontal"
-                        decrementButtonClass="p-button-primary" incrementButtonClass="p-button-primary"
-                        incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="decimal" :min="0"
+                    <InputNumber v-model="dataVehicle.nbrPlace" inputId="horizontal-buttons" showButtons
+                        buttonLayout="horizontal" decrementButtonClass="p-button-primary"
+                        incrementButtonClass="p-button-primary" incrementButtonIcon="pi pi-plus"
+                        decrementButtonIcon="pi pi-minus" mode="decimal" :min="0"
                         class="h-10 float-left mt-2 text-center " />
 
                 </div>
@@ -105,7 +105,7 @@
                 </p>
                 <div class="flex flex-column gap-3 ml-3">
                     <div v-for="category in categories" :key="category.key" class="flex align-items-center">
-                        <RadioButton v-model="selectedCategory" :inputId="category.key" name="pizza"
+                        <RadioButton v-model="dataVehicle.selectedCategory" :inputId="category.key" name="pizza"
                             :value="category.name" />
                         <label :for="category.key" class="ml-2">{{ category.name }}</label>
                     </div>
@@ -120,7 +120,7 @@
                 </p>
                 <div class="flex flex-column gap-3 mt-2 ml-3">
                     <div v-for="category of scheck" :key="category.key" class="flex align-items-center">
-                        <Checkbox v-model="selectedCategories" :inputId="category.key" name="category"
+                        <Checkbox v-model="dataVehicle.selectedCarburant" :inputId="category.key" name="category"
                             :value="category.name" />
                         <label :for="category.key" class="ml-2">{{ category.name }}</label>
                     </div>
@@ -136,10 +136,10 @@
 
                     <div class="rounded-2xl h-10 w-24 border-2 border-gray-500  flex mt-0 hover:border-b-8 hover:border-blue-900 cursor-pointer hover:shadow-sky-900 "
                         v-for="(marque, index) in marques" :key="index" @click="isMarque(marque)"
-                        :class="marque_select == marque ? 'bg-blue-900' : ''">
+                        :class="dataVehicle.marque_select == marque ? 'bg-blue-900' : ''">
 
                         <p class="font-bold text-base  mt-2 ml-3 "
-                            :class="marque_select == marque ? 'text-slate-50' : 'text-blue-900'">{{ marque }}
+                            :class="dataVehicle.marque_select == marque ? 'text-slate-50' : 'text-blue-900'">{{ marque }}
                         </p>
                     </div>
                 </div>
@@ -151,6 +151,7 @@
 </template>
 
 <script>
+import { ref } from 'vue';
 export default {
     data() {
         return {
@@ -176,7 +177,7 @@ export default {
                 { name: "Hybride", key: "H" },
                 { name: "Électrique", key: "É" },
             ],
-            selectedCategories: ['Escence'],
+            selectedCarburant: ['Escence'],
 
 
             svg: [
@@ -228,9 +229,20 @@ export default {
                                  <path fill-rule="evenodd" clip-rule="evenodd"
                                     d="M15 6H4c-1.11 0-2 .89-2 2H1v6h1v1h2a3 3 0 0 0 6 0h5a3 3 0 0 0 6 0h2v-3c0-1.11-.89-2-2-2h-3l-3-4ZM3.5 10V7.5h6V10h-6Zm7.5 0V7.5h3.25l1.89 2.5H11Zm-5.06 3.94a1.5 1.5 0 1 1 2.12 2.12 1.5 1.5 0 0 1-2.12-2.12Zm11 0a1.5 1.5 0 1 1 2.12 2.12 1.5 1.5 0 0 1-2.12-2.12Z">
                                 </path>
-                            </svg>`,
+                            </svg>`
 
-            ]
+            ],
+            dataVehicle: {
+                lac_model: ref(),
+                price: 50000,
+                car_type_select: ref(),
+                nbrPlace: ref(2),
+                selectedCategory: ref(),
+                selectedCarburant: ref(),
+                marque_select: ref(),
+                selectedCarburant: ref(['Escence']),
+                selectedCategory: 'Tous',
+            }
         };
     },
     methods: {
@@ -239,11 +251,11 @@ export default {
             if (!this.clicked) {
                 this.clicked = true
                 this.clicked1 = false
-                this.lac_model = 'rendez-vous'
+                this.dataVehicle.lac_model = 'rendez-vous'
             } else {
                 this.clicked = false
                 this.clicked1 = false
-                this.lac_model = ''
+                this.dataVehicle.lac_model = ''
 
             }
 
@@ -251,44 +263,45 @@ export default {
             if (!this.clicked1) {
                 this.clicked = false
                 this.clicked1 = true
-                this.lac_model = 'parking'
+                this.dataVehicle.lac_model = 'parking'
 
             } else {
                 this.clicked = true
                 this.clicked1 = false
-                this.lac_model = ''
+                this.dataVehicle.lac_model = ''
 
             }
         }, isVehicule(type) {
-            if (this.car_type_select != type) {
+            if (this.dataVehicle.car_type_select != type) {
                 this.car_type.forEach(types => {
 
                     if (type === types) {
-                        this.car_type_select = type
-                        console.log(this.car_type_select, type == types);
+                        this.dataVehicle.car_type_select = type
+                        console.log(this.dataVehicle.car_type_select, type == types);
+
                     } else {
-                        this.car_type_select = type
+                        this.dataVehicle.car_type_select = type
 
                     }
                 });
             } else {
-                this.car_type_select = ''
+                this.dataVehicle.car_type_select = ''
             }
 
         }, isMarque(type) {
-            if (this.marque_select != type) {
+            if (this.dataVehicle.marque_select != type) {
                 this.marques.forEach(types => {
 
                     if (type === types) {
-                        this.marque_select = type
-                        console.log(this.marque_select, type == types);
+                        this.dataVehicle.marque_select = type
+                        console.log(this.dataVehicle.marque_select, type == types);
                     } else {
-                        this.marque_select = type
+                        this.dataVehicle.marque_select = type
 
                     }
                 });
             } else {
-                this.marque_select = ''
+                this.dataVehicle.marque_select = ''
             }
 
         }

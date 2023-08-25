@@ -7,11 +7,12 @@
             <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                 <!-- class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full md:w-full lg:w-full   sm:max-w-lg"> -->
                 <div
-                    class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 w-11/12 ">
-                    <button class="text-bold text-2xl float-right p-3" @click="hiddenModal()">X</button>
+                    class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 max-w-5xl ">
+                    <button class="text-bold text-2xl float-right p-1 pl-3 pr-3 bg-red-500  rounded-bl-lg"
+                        @click="hiddenModal()">X</button>
                     <!-- Modal start -->
-                    <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 ">
-                        <vehiclesFeatures :selectVehicle="selectVehicle" />
+                    <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 max-w-5xl ">
+                        <vehiclesFeatures :vehicules="selectVehicle" />
                     </div>
 
                 </div>
@@ -23,6 +24,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import vehiclesFeatures from "./vehiclesFeatures.vue";
+import store from "@/store";
 export default defineComponent({
     components: {
         vehiclesFeatures
@@ -30,14 +32,15 @@ export default defineComponent({
     props: ['selectVehicle'],
     data() {
         return {
-            selectVehicle: this.selectVehicle
+            store
         }
     },
     methods: {
         hiddenModal() {
             this.$emit('toogle', false)
         }
-    }
+    },
+
 
 })
 </script>

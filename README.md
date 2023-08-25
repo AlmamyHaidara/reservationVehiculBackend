@@ -20,5 +20,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Git password
 ```
-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
+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
 ```
